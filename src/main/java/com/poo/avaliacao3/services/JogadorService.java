@@ -25,12 +25,16 @@ public class JogadorService {
 		return jogadorRp.findById(id).orElse(null);
 	}
 	
-	public Jogador findByNome(String nome) {
-		return jogadorRp.findByNome(nome);
+	public List<Jogador> findByNome(String nome) {
+		return jogadorRp.findByNomeContaining(nome);
+	}
+	
+	public List<Jogador> findByNomeOrAnoNascimento(String nome, int anoNascimento) {
+		return jogadorRp.findByNomeOrAnoNascimento(nome, anoNascimento);
 	}
 
-	public void delete(Jogador jogador) {
-		jogadorRp.delete(jogador);
+	public void delete(Integer id) {
+		jogadorRp.deleteById(id);
 	}
 	
 	public List<Jogador> findAll() {

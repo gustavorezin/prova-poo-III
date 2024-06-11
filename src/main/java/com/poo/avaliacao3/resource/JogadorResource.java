@@ -3,6 +3,8 @@ package com.poo.avaliacao3.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +25,14 @@ public class JogadorResource {
 	JogadorService jogadorService;
 	
 	@PostMapping
-	public Jogador insertJogador(@RequestBody Jogador jogador) {
-		return jogadorService.insert(jogador);
+	public ResponseEntity<?> insertJogador(@RequestBody Jogador jogador) {
+		try {
+            Jogador novoJogador = jogadorService.insert(jogador);
+            return ResponseEntity.ok(novoJogador);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar");
+        }
 	}
 
 	@PutMapping
@@ -43,12 +51,17 @@ public class JogadorResource {
 	}
 	
 	@GetMapping("/nome/{nome}")
-	public Jogador findByNome(@PathVariable String nome) {
+	public List<Jogador> findByNome(@PathVariable String nome) {
 		return jogadorService.findByNome(nome);
 	}
 	
-	@DeleteMapping
-	public void deleteJogador(@RequestBody Jogador jogador) {
-		jogadorService.delete(jogador);
+	@GetMapping("/nome/{nome}/anoNascimento/{anoNascimento}")
+	public List<Jogador> findByNomeOrAnoNascimento(@PathVariable String nome, @PathVariable int anoNascimento) {
+		return jogadorService.findByNomeOrAnoNascimento(nome, anoNascimento);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteJogador(@RequestBody Integer id) {
+		jogadorService.delete(id);
 	}
 }
