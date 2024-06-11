@@ -3,6 +3,8 @@ package com.poo.avaliacao3.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,34 +22,81 @@ import com.poo.avaliacao3.services.TimeService;
 public class TimeResource {
 	@Autowired
 	TimeService timeService;
-	
+
 	@PostMapping
-	public Time insertTime(@RequestBody Time time) {
-		return timeService.insert(time);
+	public ResponseEntity<?> insertTime(@RequestBody Time time) {
+		try {
+			Time novoTime = timeService.insert(time);
+			return ResponseEntity.ok(novoTime);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar time");
+		}
 	}
 
 	@PutMapping
-	public Time updateTime(@RequestBody Time time) {
-		return timeService.update(time);
+	public ResponseEntity<?> updateTime(@RequestBody Time time) {
+		try {
+			Time timeAlterado = timeService.update(time);
+			return ResponseEntity.ok(timeAlterado);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao alterar time");
+		}
 	}
-	
+
 	@GetMapping
-	public List<Time> listAllTime() { 
-		return timeService.findAll();
+	public ResponseEntity<?> listAllTime() {
+		try {
+			List<Time> listaTimes = timeService.findAll();
+			return ResponseEntity.ok(listaTimes);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao listar times");
+		}
 	}
-	
+
 	@GetMapping("/{id}")
-	public Time findByIdTime(@PathVariable Integer id) {
-		return timeService.findById(id);
+	public ResponseEntity<?> findByIdTime(@PathVariable Integer id) {
+		try {
+			Time time = timeService.findById(id);
+			return ResponseEntity.ok(time);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar time");
+		}
 	}
-	
+
 	@GetMapping("/nome/{nome}")
-	public Time findByNome(@PathVariable String nome) {
-		return timeService.findByNome(nome);
+	public ResponseEntity<?> findByNome(@PathVariable String nome) {
+		try {
+			List<Time> times = timeService.findByNome(nome);
+			return ResponseEntity.ok(times);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar times");
+		}
 	}
-	
+
+	@GetMapping("/nome/{nome}/anoNascimento/{anoNascimento}")
+	public ResponseEntity<?> findByNomeOrAnoFundacao(@PathVariable String nome, @PathVariable int anoFundacao) {
+		try {
+			List<Time> times = timeService.findByNomeOrAnoFundacao(nome, anoFundacao);
+			return ResponseEntity.ok(times);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar times");
+		}
+	}
+
 	@DeleteMapping
-	public void deleteTime(@RequestBody Time time) {
-		timeService.delete(time);
+	public ResponseEntity<?> deleteTime(@RequestBody Time time) {
+		try {
+			timeService.delete(time);
+			return ResponseEntity.ok("Deletado com sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao deletar time");
+		}
 	}
 }
