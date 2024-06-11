@@ -52,7 +52,7 @@ Aqui estão alguns exemplos de endpoints disponíveis:
 | <kbd>GET /time/{id}</kbd>     | Busca time por `id`
 | <kbd>GET /time/nome/{nome}</kbd>     | Lista de times com `nome` LIKE
 | <kbd>GET /time/nome/{nome}/anoFundacao/{anoFundacao}</kbd>     | Lista de times com `nome` ou `anoFundacao` LIKE
-| <kbd>DELETE /time</kbd>     | Deleta jogador
+| <kbd>DELETE /time</kbd>     | Deleta time
 
 
 ## 🤝 Informações da Dupla
