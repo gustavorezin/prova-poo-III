@@ -78,7 +78,7 @@ public class TimeResource {
 		}
 	}
 
-	@GetMapping("/nome/{nome}/anoNascimento/{anoNascimento}")
+	@GetMapping("/nome/{nome}/anoFundacao/{anoFundacao}")
 	public ResponseEntity<?> findByNomeOrAnoFundacao(@PathVariable String nome, @PathVariable int anoFundacao) {
 		try {
 			List<Time> times = timeService.findByNomeOrAnoFundacao(nome, anoFundacao);
