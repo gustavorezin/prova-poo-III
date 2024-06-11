@@ -20,48 +20,84 @@ import com.poo.avaliacao3.services.JogadorService;
 @RestController
 @RequestMapping("/jogador")
 public class JogadorResource {
-	
+
 	@Autowired
 	JogadorService jogadorService;
-	
+
 	@PostMapping
 	public ResponseEntity<?> insertJogador(@RequestBody Jogador jogador) {
 		try {
-            Jogador novoJogador = jogadorService.insert(jogador);
-            return ResponseEntity.ok(novoJogador);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar");
-        }
+			Jogador novoJogador = jogadorService.insert(jogador);
+			return ResponseEntity.ok(novoJogador);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar jogador");
+		}
 	}
 
 	@PutMapping
-	public Jogador updateJogador(@RequestBody Jogador jogador) {
-		return jogadorService.update(jogador);
+	public ResponseEntity<?> updateJogador(@RequestBody Jogador jogador) {
+		try {
+			Jogador jogadorAlterado = jogadorService.update(jogador);
+			return ResponseEntity.ok(jogadorAlterado);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao alterar jogador");
+		}
 	}
-	
+
 	@GetMapping
-	public List<Jogador> listAllJogador() { 
-		return jogadorService.findAll();
+	public ResponseEntity<?> listAllJogador() {
+		try {
+			List<Jogador> jogadores = jogadorService.findAll();
+			return ResponseEntity.ok(jogadores);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao listar jogadores");
+		}
 	}
-	
+
 	@GetMapping("/{id}")
-	public Jogador findByIdJogador(@PathVariable Integer id) {
-		return jogadorService.findById(id);
+	public ResponseEntity<?> findByIdJogador(@PathVariable Integer id) {
+		try {
+			Jogador jogador = jogadorService.findById(id);
+			return ResponseEntity.ok(jogador);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar jogador");
+		}
 	}
-	
+
 	@GetMapping("/nome/{nome}")
-	public List<Jogador> findByNome(@PathVariable String nome) {
-		return jogadorService.findByNome(nome);
+	public ResponseEntity<?> findByNome(@PathVariable String nome) {
+		try {
+			List<Jogador> jogadores = jogadorService.findByNome(nome);
+			return ResponseEntity.ok(jogadores);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar jogadores");
+		}
 	}
-	
+
 	@GetMapping("/nome/{nome}/anoNascimento/{anoNascimento}")
-	public List<Jogador> findByNomeOrAnoNascimento(@PathVariable String nome, @PathVariable int anoNascimento) {
-		return jogadorService.findByNomeOrAnoNascimento(nome, anoNascimento);
+	public ResponseEntity<?> findByNomeOrAnoNascimento(@PathVariable String nome, @PathVariable int anoNascimento) {
+		try {
+			List<Jogador> jogadores = jogadorService.findByNomeOrAnoNascimento(nome, anoNascimento);
+			return ResponseEntity.ok(jogadores);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar jogadores");
+		}
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void deleteJogador(@RequestBody Integer id) {
-		jogadorService.delete(id);
+	public ResponseEntity<?> deleteJogador(@RequestBody Integer id) {
+		try {
+			jogadorService.delete(id);
+			return ResponseEntity.ok("Deletado com sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao deletar jogador");
+		}
 	}
 }

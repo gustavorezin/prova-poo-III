@@ -8,6 +8,6 @@ import com.poo.avaliacao3.model.Jogador;
 
 public interface JogadorRepository extends JpaRepository<Jogador, Integer> {
 	public List<Jogador> findByNomeContaining(String nome);
-	
+
 	public List<Jogador> findByNomeOrAnoNascimento(String nome, int anoNascimento);
 }

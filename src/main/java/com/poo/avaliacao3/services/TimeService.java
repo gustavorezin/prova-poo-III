@@ -12,11 +12,11 @@ import com.poo.avaliacao3.repository.TimeRepository;
 public class TimeService {
 	@Autowired
 	TimeRepository timeRp;
-	
+
 	public Time insert(Time time) {
-		return timeRp.save(time);		
+		return timeRp.save(time);
 	}
-	
+
 	public Time update(Time time) {
 		return timeRp.save(time);
 	}
@@ -24,15 +24,19 @@ public class TimeService {
 	public Time findById(Integer id) {
 		return timeRp.findById(id).orElse(null);
 	}
-	
-	public Time findByNome(String nome) {
-		return timeRp.findByNome(nome);
+
+	public List<Time> findByNome(String nome) {
+		return timeRp.findByNomeContaining(nome);
+	}
+
+	public List<Time> findByNomeOrAnoFundacao(String nome, int anoFundacao) {
+		return timeRp.findByNomeOrAnoFundacao(nome, anoFundacao);
 	}
 
 	public void delete(Time time) {
 		timeRp.delete(time);
 	}
-	
+
 	public List<Time> findAll() {
 		return timeRp.findAll();
 	}
