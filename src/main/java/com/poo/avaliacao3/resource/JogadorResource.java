@@ -31,7 +31,7 @@ public class JogadorResource {
 			return ResponseEntity.ok(novoJogador);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar jogador");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar jogador");
 		}
 	}
 
@@ -42,7 +42,7 @@ public class JogadorResource {
 			return ResponseEntity.ok(jogadorAlterado);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao alterar jogador");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao alterar jogador");
 		}
 	}
 
@@ -97,7 +97,7 @@ public class JogadorResource {
 			return ResponseEntity.ok("Deletado com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao deletar jogador");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar jogador");
 		}
 	}
 }

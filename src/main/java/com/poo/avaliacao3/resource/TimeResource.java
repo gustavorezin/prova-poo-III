@@ -30,7 +30,7 @@ public class TimeResource {
 			return ResponseEntity.ok(novoTime);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao salvar time");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao salvar time");
 		}
 	}
 
@@ -41,7 +41,7 @@ public class TimeResource {
 			return ResponseEntity.ok(timeAlterado);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao alterar time");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao alterar time");
 		}
 	}
 
@@ -96,7 +96,7 @@ public class TimeResource {
 			return ResponseEntity.ok("Deletado com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao deletar time");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar time");
 		}
 	}
 }
