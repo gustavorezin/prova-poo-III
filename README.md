@@ -60,3 +60,7 @@ Este projeto foi desenvolvido por:
 
 - [![gustavorezin](https://img.shields.io/badge/gustavorezin--lightgrey?style=social&logo=github)](https://github.com/gustavorezin)
 - [![ArthurCarrerMedeiros](https://img.shields.io/badge/ArthurCarrerMedeiros--lightgrey?style=social&logo=github)](https://github.com/ArthurCarrerMedeiros)
+
+## 📃 Licença
+
+- Este projeto está sob a licença [MIT](./LICENSE)
