@@ -13,15 +13,13 @@ public class Time {
 	private Integer id;
 	@Column
 	private String nome;
-	@Column 
+	@Column
 	private int anoFundacao;
 
 	public Time() {
-		super();
 	}
 
 	public Time(Integer id, String nome, int anoFundacao) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.anoFundacao = anoFundacao;

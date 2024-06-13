@@ -14,17 +14,15 @@ public class Jogador {
 	private Integer id;
 	@Column
 	private String nome;
-	@Column 
+	@Column
 	private int anoNascimento;
 	@ManyToOne
 	private Time time;
-	
+
 	public Jogador() {
-		super();
 	}
 
 	public Jogador(Integer id, String nome, int anoNascimento, Time time) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.anoNascimento = anoNascimento;

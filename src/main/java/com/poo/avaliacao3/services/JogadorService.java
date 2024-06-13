@@ -12,11 +12,11 @@ import com.poo.avaliacao3.repository.JogadorRepository;
 public class JogadorService {
 	@Autowired
 	JogadorRepository jogadorRp;
-	
+
 	public Jogador insert(Jogador jogador) {
-		return jogadorRp.save(jogador);		
+		return jogadorRp.save(jogador);
 	}
-	
+
 	public Jogador update(Jogador jogador) {
 		return jogadorRp.save(jogador);
 	}
@@ -24,11 +24,11 @@ public class JogadorService {
 	public Jogador findById(Integer id) {
 		return jogadorRp.findById(id).orElse(null);
 	}
-	
+
 	public List<Jogador> findByNome(String nome) {
 		return jogadorRp.findByNomeContaining(nome);
 	}
-	
+
 	public List<Jogador> findByNomeOrAnoNascimento(String nome, int anoNascimento) {
 		return jogadorRp.findByNomeOrAnoNascimento(nome, anoNascimento);
 	}
@@ -36,9 +36,8 @@ public class JogadorService {
 	public void delete(Integer id) {
 		jogadorRp.deleteById(id);
 	}
-	
+
 	public List<Jogador> findAll() {
 		return jogadorRp.findAll();
 	}
-
 }

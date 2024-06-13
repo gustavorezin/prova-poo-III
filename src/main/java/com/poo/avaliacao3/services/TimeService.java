@@ -40,5 +40,4 @@ public class TimeService {
 	public List<Time> findAll() {
 		return timeRp.findAll();
 	}
-
 }
