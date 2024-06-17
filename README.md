@@ -35,24 +35,26 @@ git clone https://github.com/gustavorezin/prova-poo-III.git
 ```
 
 ## 📍 Endpoints da API
-Aqui estão alguns exemplos de endpoints disponíveis:
+Aqui estão os endpoints disponíveis:
 
 | rota               | descrição                                          
 |----------------------|-----------------------------------------------------
 | <kbd>POST /jogador</kbd>     | Salva novo jogador
-| <kbd>PUT /jogador</kbd>     | Atualiza jogador
+| <kbd>PUT /jogador/{id}</kbd>     | Atualiza jogador
 | <kbd>GET /jogador</kbd>     | Lista de jogadores
 | <kbd>GET /jogador/{id}</kbd>     | Busca jogador por `id`
 | <kbd>GET /jogador/nome/{nome}</kbd>     | Lista de jogadores com `nome` LIKE
 | <kbd>GET /jogador/nome/{nome}/anoNascimento/{anoNascimento}</kbd>     | Lista de jogadores com `nome` ou `anoNascimento` LIKE
-| <kbd>DELETE /jogador</kbd>     | Deleta jogador
+| <kbd>DELETE /jogador/{id}</kbd>     | Deleta jogador
+| <kbd>DELETE /jogador</kbd>     | Deleta todos os jogadores
 | <kbd>POST /time</kbd>     | Salva novo time
-| <kbd>PUT /time</kbd>     | Atualiza time
+| <kbd>PUT /time/{id}</kbd>     | Atualiza time
 | <kbd>GET /time</kbd>     | Lista de times
 | <kbd>GET /time/{id}</kbd>     | Busca time por `id`
 | <kbd>GET /time/nome/{nome}</kbd>     | Lista de times com `nome` LIKE
 | <kbd>GET /time/nome/{nome}/anoFundacao/{anoFundacao}</kbd>     | Lista de times com `nome` ou `anoFundacao` LIKE
-| <kbd>DELETE /time</kbd>     | Deleta time
+| <kbd>DELETE /time/{id}</kbd>     | Deleta time
+| <kbd>DELETE /time</kbd>     | Deleta todos os times
 
 
 ## 🤝 Informações da Dupla
