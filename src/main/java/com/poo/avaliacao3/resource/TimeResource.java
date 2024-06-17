@@ -34,10 +34,10 @@ public class TimeResource {
 		}
 	}
 
-	@PutMapping
-	public ResponseEntity<?> updateTime(@RequestBody Time time) {
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateTime(@PathVariable Integer id, @RequestBody Time time) {
 		try {
-			Time timeAlterado = timeService.update(time);
+			Time timeAlterado = timeService.update(id, time);
 			return ResponseEntity.ok(timeAlterado);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class TimeResource {
 			return ResponseEntity.ok(time);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar time");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Time não encontrado");
 		}
 	}
 
@@ -89,14 +89,25 @@ public class TimeResource {
 		}
 	}
 
-	@DeleteMapping
-	public ResponseEntity<?> deleteTime(@RequestBody Time time) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteTime(@PathVariable Integer id) {
 		try {
-			timeService.delete(time);
+			timeService.delete(id);
 			return ResponseEntity.ok("Deletado com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar time");
+		}
+	}
+
+	@DeleteMapping
+	public ResponseEntity<?> deleteAllTimeAndResetIncrement() {
+		try {
+			timeService.deleteAllAndResetIncrement();
+			return ResponseEntity.ok("Todos os times deletados com sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar todos os times");
 		}
 	}
 }

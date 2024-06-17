@@ -28,9 +28,8 @@ public class JogadorService {
 		Jogador jogadorAtual = findById(id);
 		jogadorAtual.setNome(jogador.getNome());
 		jogadorAtual.setAnoNascimento(jogador.getAnoNascimento());
-	    jogadorAtual.setTime(jogador.getTime());
-	        
-	    return jogadorRp.save(jogadorAtual);
+		jogadorAtual.setTime(jogador.getTime());
+		return jogadorRp.save(jogadorAtual);
 	}
 
 	public Jogador findById(Integer id) {
@@ -48,7 +47,7 @@ public class JogadorService {
 	public void delete(Integer id) {
 		jogadorRp.deleteById(id);
 	}
-	
+
 	@Transactional
 	public void deleteAllAndResetIncrement() {
 		jogadorRp.deleteAll();

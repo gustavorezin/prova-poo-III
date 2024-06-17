@@ -8,21 +8,31 @@ import org.springframework.stereotype.Service;
 import com.poo.avaliacao3.model.Time;
 import com.poo.avaliacao3.repository.TimeRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
 @Service
 public class TimeService {
 	@Autowired
 	TimeRepository timeRp;
+	@PersistenceContext
+	EntityManager entityManager;
 
 	public Time insert(Time time) {
 		return timeRp.save(time);
 	}
 
-	public Time update(Time time) {
-		return timeRp.save(time);
+	@Transactional
+	public Time update(Integer id, Time time) {
+		Time timeAtual = findById(id);
+		timeAtual.setNome(time.getNome());
+		timeAtual.setAnoFundacao(time.getAnoFundacao());
+		return timeRp.save(timeAtual);
 	}
 
 	public Time findById(Integer id) {
-		return timeRp.findById(id).orElse(null);
+		return timeRp.findById(id).orElseThrow();
 	}
 
 	public List<Time> findByNome(String nome) {
@@ -33,8 +43,14 @@ public class TimeService {
 		return timeRp.findByNomeOrAnoFundacao(nome, anoFundacao);
 	}
 
-	public void delete(Time time) {
-		timeRp.delete(time);
+	public void delete(Integer id) {
+		timeRp.deleteById(id);
+	}
+
+	@Transactional
+	public void deleteAllAndResetIncrement() {
+		timeRp.deleteAll();
+		entityManager.createNativeQuery("ALTER TABLE time AUTO_INCREMENT = 1").executeUpdate();
 	}
 
 	public List<Time> findAll() {
