@@ -35,10 +35,10 @@ public class JogadorResource {
 		}
 	}
 
-	@PutMapping
-	public ResponseEntity<?> updateJogador(@RequestBody Jogador jogador) {
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateJogador(@PathVariable Integer id, @RequestBody Jogador jogador) {
 		try {
-			Jogador jogadorAlterado = jogadorService.update(jogador);
+			Jogador jogadorAlterado = jogadorService.update(id, jogador);
 			return ResponseEntity.ok(jogadorAlterado);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,7 +64,7 @@ public class JogadorResource {
 			return ResponseEntity.ok(jogador);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao encontrar jogador");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Jogador não encontrado");
 		}
 	}
 
@@ -91,13 +91,24 @@ public class JogadorResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteJogador(@RequestBody Integer id) {
+	public ResponseEntity<?> deleteJogador(@PathVariable Integer id) {
 		try {
 			jogadorService.delete(id);
 			return ResponseEntity.ok("Deletado com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar jogador");
+		}
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<?> deleteAllJogadorAndResetIncrement() {
+		try {
+			jogadorService.deleteAllAndResetIncrement();
+			return ResponseEntity.ok("Todos os jogadores deletados com sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao deletar todos os jogadores");
 		}
 	}
 }
